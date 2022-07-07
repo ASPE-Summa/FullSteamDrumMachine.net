@@ -1,0 +1,59 @@
+﻿<Page x:Class="FullSteamDrumMachine.net.Pages.SongPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:FullSteamDrumMachine.net.Pages"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="1080" d:DesignWidth="1920"
+      Title="SongPage" Background="#250443">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label FontSize="30" Grid.Column="1" Grid.Row="0" Foreground="Cyan">Manage Songs</Label>
+        <Button Grid.Row="2" Grid.Column="1" Width="50" Height="50" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Plus" 
+        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+        <ListBox Grid.Row="3" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding Songs}"></ListBox>
+        <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Play" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Play</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Edit" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Edit</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="3" IsEnabled="False" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Download" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Export</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Trash" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Delete</TextBlock>
+            </StackPanel>
+        </Button>
+    </Grid>
+</Page>

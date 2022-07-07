@@ -3,10 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FullSteamDrumMachine.net"
+        xmlns:local="clr-namespace:FullSteamDrumMachine.net" 
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-
-    </Grid>
+        Title="Full Steam Drum Machine" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#250443">
+    <Frame x:Name="mainframe">
+        
+    </Frame>
 </Window>
