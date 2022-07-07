@@ -1,8 +1,5 @@
-﻿using System;
+﻿using FullSteamDrumMachine.net.Repository.Exceptions;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FullSteamDrumMachine.net.Repository.Interfaces
 {
@@ -17,7 +14,7 @@ namespace FullSteamDrumMachine.net.Repository.Interfaces
         /// <exception cref="DataRetrievalException">
         /// Thrown when an error occurs trying to fetch the data from the database.
         /// </exception>
-        public IObservable<T> fetchAll();
+        public ICollection<T> fetchAll();
 
         ///<summary>
         /// Fetch a single databaseRecord and hydrate it into an object of the expected Type.
@@ -33,11 +30,15 @@ namespace FullSteamDrumMachine.net.Repository.Interfaces
         /// </exception>
         public T findById(int id);
 
-        /**
-         * Delete the database record for the given Id.
-         *
-         * @param id the Id for which to delete the record.
-         */
-        void deleteById(int id) throws DataRemovalException;
+        ///<summary>
+        ///Delete the database record for the given Id.
+        /// </summary>
+        /// <param name="id">
+        /// the Id for which to delete the record.
+        /// </param>
+        /// <exception cref="DataRemovalException">
+        /// Occurs when the record cannot be removed.
+        /// </exception>
+        void deleteById(int id);
     }
 }

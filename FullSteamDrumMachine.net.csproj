@@ -8,8 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Exceptions\" />
-    <Folder Include="Service\" />
     <Folder Include="Util\" />
   </ItemGroup>
 
