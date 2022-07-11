@@ -1,4 +1,5 @@
 ﻿using FullSteamDrumMachine.net.Repository.Exceptions;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace FullSteamDrumMachine.net.Repository.Interfaces

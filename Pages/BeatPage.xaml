@@ -3,12 +3,90 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-      xmlns:local="clr-namespace:FullSteamDrumMachine.net.Pages"
+      xmlns:local="clr-namespace:FullSteamDrumMachine.net.Pages" xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920" Background="#250443"
       Title="BeatPage">
-
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+            <ColumnDefinition Width="0.5*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Label FontSize="30" Grid.Column="1" Grid.Row="0" Foreground="Cyan">Manage Beat</Label>
+        <DataGrid Grid.Row="3" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding BeatMeasures}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding MeasureId}" Visibility="Hidden"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding InstrumentId}" Visibility="Hidden"></DataGridTextColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>Instrument</DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <Button Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Center" fa:Awesome.Content="Trash" 
+        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.Header>Notes</DataGridTemplateColumn.Header>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                                <CheckBox></CheckBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Play" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Preview</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="Plus" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Add</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center">
+            <StackPanel Orientation="Horizontal">
+                <fa:FontAwesome Icon="ArrowLeft" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <TextBlock FontSize="50">Back</TextBlock>
+            </StackPanel>
+        </Button>
     </Grid>
 </Page>
