@@ -5,10 +5,18 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FullSteamDrumMachine.net.DialogBoxes"
         mc:Ignorable="d"
-        Title="Add a new Song" Height="200" Width="800">
-    <StackPanel>
-        <TextBlock>Name your new song:</TextBlock>
-        <TextBox Text="{Binding SongName}"></TextBox>
-        <Button Click="Button_Click">Ok</Button>
-    </StackPanel>
+        Title="Add a new Song" Height="200" Width="400" WindowStartupLocation="CenterScreen"
+                        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <DockPanel>
+        <TextBlock DockPanel.Dock="Top" Margin="0,20,0,0">Name your new song:</TextBlock>
+        <TextBox DockPanel.Dock="Top" Text="{Binding SongName}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}"></TextBox>
+        <Button  DockPanel.Dock="Bottom" Click="Button_Click" VerticalAlignment="Bottom">Ok</Button>
+    </DockPanel>
 </Window>

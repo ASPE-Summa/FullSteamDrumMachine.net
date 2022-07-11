@@ -23,12 +23,26 @@ namespace FullSteamDrumMachine.net.Service
         }
         public void createSong(string songName)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _songRepository.createSong(songName);
+            }
+            catch(DataPersistanceException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public void deleteSong(Song song)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _songRepository.deleteById(song.SongId);
+            }
+            catch(DataRemovalException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
 
         public Song findSong(int id)
@@ -64,7 +78,14 @@ namespace FullSteamDrumMachine.net.Service
 
         public void updateBpm(Song song, int bpmValue)
         {
-            throw new NotImplementedException();
+            try
+            {
+                _songRepository.updateBpm(song, bpmValue);
+            }
+            catch (DataRemovalException e)
+            {
+                MessageBox.Show(e.Message);
+            }
         }
     }
 }

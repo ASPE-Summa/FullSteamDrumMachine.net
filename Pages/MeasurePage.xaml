@@ -28,10 +28,14 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label FontSize="30" Grid.Column="1" Grid.Row="0" Foreground="Cyan">Manage Measures</Label>
+        <StackPanel  Grid.Column="1" Grid.Row="0">
+            <Label FontSize="30" Foreground="Cyan" Content="Manage Measures for: "/>
+            <Label FontSize="30" Foreground="Cyan" Content="{Binding Song.Name}"/>
+        </StackPanel>
+
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
             <Label Foreground="Cyan" FontSize="30" VerticalAlignment="Center">BPM :</Label>
-            <wpfx:ButtonSpinner Name="SpinButton" Height="60" FontSize="30" Width="100"  Content="88" Spin="SpinButton_Spin" />
+            <wpfx:ButtonSpinner Name="SpinButton" Height="60" FontSize="30" Width="100"  Content="{Binding Song.Bpm}" Spin="SpinButton_Spin" />
         </StackPanel>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <Button Grid.Row="2" Grid.Column="1" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Plus" 
@@ -62,7 +66,7 @@
                 <TextBlock FontSize="50">Delete</TextBlock>
             </StackPanel>
         </Button>
-        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center">
+        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center" Click="BackButton_Click">
             <StackPanel Orientation="Horizontal">
                 <fa:FontAwesome Icon="ArrowLeft" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
                 <TextBlock FontSize="50">Back</TextBlock>

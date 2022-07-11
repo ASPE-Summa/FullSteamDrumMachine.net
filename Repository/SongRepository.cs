@@ -14,33 +14,56 @@ namespace FullSteamDrumMachine.net.Repository
 {
     public class SongRepository : ISongRepository
     {
-        private MySqlConnection _connection = new MySqlConnection();
-
-        public SongRepository()
-        {
-            _connection.ConnectionString = ConfigurationManager.ConnectionStrings["DrumMachineDb"].ConnectionString;
-        }
+        private string connectionString = ConfigurationManager.ConnectionStrings["DrumMachineDb"].ConnectionString;
 
         public void createSong(string songName)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection connection = new (connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand cmd = connection.CreateCommand();
+                    cmd.CommandText = "INSERT INTO song(name,bpm) VALUES(@songName, 95);";
+                    cmd.Parameters.AddWithValue("@songName", songName);
+                    cmd.ExecuteNonQuery();
+                }
+                catch(Exception e)
+                {
+                    throw new DataPersistanceException($"Failed to insert song {songName}", e);
+                }
+            }
         }
 
         public void deleteById(int id)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection connection = new(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand cmd = connection.CreateCommand();
+                    cmd.CommandText = "DELETE FROM song WHERE songId = @songId;";
+                    cmd.Parameters.AddWithValue("@songId", id);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw new DataPersistanceException($"Failed to delete song with id {id}", e);
+                }
+            }
         }
 
         public ICollection<Song> fetchAll()
         {
             List<Song> result = new List<Song>();
-            using(MySqlConnection connection = _connection)
+            using(MySqlConnection connection = new(connectionString))
             {
                 try
                 {
-                    _connection.Open();
-                    MySqlCommand command = _connection.CreateCommand();
-                    command.CommandText = "SELECT * FROM song";
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM song;";
                     MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -63,7 +86,22 @@ namespace FullSteamDrumMachine.net.Repository
 
         public void updateBpm(Song song, int bpmValue)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection connection = new(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand cmd = connection.CreateCommand();
+                    cmd.CommandText = "UPDATE song SET bpm = @bpm WHERE songId = @songId";
+                    cmd.Parameters.AddWithValue("@songId", song.SongId);
+                    cmd.Parameters.AddWithValue("@bpm", bpmValue);
+                    cmd.ExecuteNonQuery();
+                }
+                catch (Exception e)
+                {
+                    throw new DataPersistanceException($"Failed to update bpm for song {song.Name}", e);
+                }
+            }
         }
     }
 }

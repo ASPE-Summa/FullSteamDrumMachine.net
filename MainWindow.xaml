@@ -6,8 +6,16 @@
         xmlns:local="clr-namespace:FullSteamDrumMachine.net" 
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="Full Steam Drum Machine" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#250443">
-    <Frame x:Name="mainframe">
+        Title="Full Steam Drum Machine" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal" 
+        TextOptions.TextRenderingMode="Auto"        
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}">
+    <Frame x:Name="mainframe" NavigationUIVisibility="Hidden">
         
     </Frame>
 </Window>
