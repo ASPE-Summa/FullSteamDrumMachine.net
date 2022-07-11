@@ -8,11 +8,9 @@
       xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
       mc:Ignorable="d" 
       d:DesignHeight="1080" d:DesignWidth="1920"
-      Title="MeasurePage" Background="#250443">
+      Title="MeasurePage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
@@ -28,49 +26,50 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <StackPanel  Grid.Column="1" Grid.Row="0">
-            <Label FontSize="30" Foreground="Cyan" Content="Manage Measures for: "/>
-            <Label FontSize="30" Foreground="Cyan" Content="{Binding Song.Name}"/>
+        <StackPanel  Grid.Column="1" Grid.Row="0" Orientation="Horizontal">
+            <Label Content="Manage Measures for: "/>
+            <Label Content="{Binding Song.Name}"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Label Foreground="Cyan" FontSize="30" VerticalAlignment="Center">BPM :</Label>
-            <wpfx:ButtonSpinner Name="SpinButton" Height="60" FontSize="30" Width="100"  Content="{Binding Song.Bpm}" Spin="SpinButton_Spin" />
-        </StackPanel>
-        <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <Button Grid.Row="2" Grid.Column="1" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Plus" 
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
+            <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Plus" 
         TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button Grid.Row="2" Grid.Column="1" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Repeat" 
+            <Button Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Repeat" 
         TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button Grid.Row="2" Grid.Column="1" Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Close" 
+            <Button Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Close" 
         TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+            <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                <Label VerticalAlignment="Center">BPM :</Label>
+                <wpfx:ButtonSpinner Name="SpinButton"  Width="100"  Content="{Binding Song.Bpm}" Spin="SpinButton_Spin" />
+            </StackPanel>
         </StackPanel>
 
-
-        <ListBox Grid.Row="3" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding Measures}"></ListBox>
-        <Button Grid.Row="1" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Play" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Play</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Edit" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Edit</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Trash" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Delete</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center" Click="BackButton_Click">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="ArrowLeft" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Back</TextBlock>
-            </StackPanel>
-        </Button>
+        <ListBox Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" ItemsSource="{Binding Measures}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}"></ListBox>
+        <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
+            <Button HorizontalContentAlignment="Center" IsEnabled="False">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Play" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Play</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Edit" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Edit</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Trash" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Delete</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Center" Click="BackButton_Click" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="ArrowLeft" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Back</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

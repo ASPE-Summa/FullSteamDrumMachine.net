@@ -5,12 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:FullSteamDrumMachine.net.Pages" xmlns:fa="http://schemas.fontawesome.io/icons/"
       mc:Ignorable="d" 
-      d:DesignHeight="1080" d:DesignWidth="1920" Background="#250443"
+      d:DesignHeight="1080" d:DesignWidth="1920"
       Title="BeatPage">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
             <RowDefinition Height="0.5*"></RowDefinition>
@@ -26,8 +24,8 @@
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <Label FontSize="30" Grid.Column="1" Grid.Row="0" Foreground="Cyan">Manage Beat</Label>
-        <DataGrid Grid.Row="3" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding BeatMeasures}">
+        <Label Grid.Column="1" Grid.Row="0">Manage Beat</Label>
+        <DataGrid Grid.Row="1" Grid.Column="1" Grid.RowSpan="5" ItemsSource="{Binding BeatMeasures}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding MeasureId}" Visibility="Hidden"></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding InstrumentId}" Visibility="Hidden"></DataGridTextColumn>
@@ -70,23 +68,25 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="3" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Play" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Preview</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Grid.Row="5" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="Plus" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Add</TextBlock>
-            </StackPanel>
-        </Button>
-        <Button Grid.Row="7" Grid.Column="3" HorizontalContentAlignment="Center">
-            <StackPanel Orientation="Horizontal">
-                <fa:FontAwesome Icon="ArrowLeft" FontSize="50" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                <TextBlock FontSize="50">Back</TextBlock>
-            </StackPanel>
-        </Button>
+        <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
+            <Button HorizontalContentAlignment="Center" IsEnabled="False">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Play" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Preview</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="Plus" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Add</TextBlock>
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Center" Click="BackButton_Click" Margin="0,10,0,0">
+                <StackPanel Orientation="Horizontal">
+                    <fa:FontAwesome Icon="ArrowLeft" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                    <TextBlock>Back</TextBlock>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Page>

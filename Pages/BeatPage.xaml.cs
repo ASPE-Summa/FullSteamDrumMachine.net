@@ -24,5 +24,10 @@ namespace FullSteamDrumMachine.net.Pages
         {
             InitializeComponent();
         }
+
+        private void BackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
