@@ -1,11 +1,13 @@
 ﻿using FullSteamDrumMachine.net.Model;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace FullSteamDrumMachine.net.Service.Interfaces
 {
     public interface ISongManager
     {
-        public ICollection<Song> getSongCollection();
+        public ObservableCollection<Song> getSongCollection();
 
         public void createSong(string songName);
 
