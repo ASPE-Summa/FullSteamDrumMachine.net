@@ -33,18 +33,16 @@
 
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <Button Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Plus" 
-        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Click="AddButton_Click"/>
             <Button Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Repeat" 
-        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-            <Button Grid.Row="2" Grid.Column="1"  HorizontalAlignment="Left" VerticalAlignment="Bottom" fa:Awesome.Content="Close" 
-        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
+        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome" Click="ReuseButton_Click"/>
             <StackPanel Height="50" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                 <Label VerticalAlignment="Center">BPM :</Label>
                 <wpfx:ButtonSpinner Name="SpinButton"  Width="100"  Content="{Binding Song.Bpm}" Spin="SpinButton_Spin" />
             </StackPanel>
         </StackPanel>
 
-        <ListBox Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" ItemsSource="{Binding Measures}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}"></ListBox>
+        <ListBox Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" ItemsSource="{Binding Measures}" SelectedItem="{Binding SelectedMeasure}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}"></ListBox>
         <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
             <Button HorizontalContentAlignment="Center" IsEnabled="False">
                 <StackPanel Orientation="Horizontal">
@@ -52,13 +50,13 @@
                     <TextBlock>Play</TextBlock>
                 </StackPanel>
             </Button>
-            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0">
+            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0" Click="EditButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <fa:FontAwesome Icon="Edit" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock>Edit</TextBlock>
                 </StackPanel>
             </Button>
-            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0">
+            <Button HorizontalContentAlignment="Center" Margin="0,10,0,0" Click="DeleteButton_Click">
                 <StackPanel Orientation="Horizontal">
                     <fa:FontAwesome Icon="Trash" VerticalAlignment="Center" Margin="0,0,10,0"/>
                     <TextBlock>Delete</TextBlock>

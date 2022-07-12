@@ -45,9 +45,17 @@ namespace FullSteamDrumMachine.net.Service
             }
         }
 
-        public Song findSong(int id)
+        public Song? findSong(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                return _songRepository.findById(id);
+            }
+            catch(DataRetrievalException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            return null;
         }
 
         public ObservableCollection<Song> getSongCollection()

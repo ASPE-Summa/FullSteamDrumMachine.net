@@ -11,21 +11,23 @@ namespace FullSteamDrumMachine.net.Model
         private int songMeasureId;
         public int SongMeasureId { get { return songMeasureId; } }
 
-        private int songId;
-        public int SongId { get { return songId; } }
+        private Song song;
+        public Song Song { get { return song; } }
 
-        private int measureId;
-        public int MeasureId { get { return measureId; } }
+        private Measure measure;
+        public Measure Measure { get { return measure; } }
 
-        private int sequence;
-        public int Sequence { get { return sequence; } }
 
-        public SongMeasure(int songMeasureId, int songId, int measureId, int sequence)
+        public SongMeasure(int songMeasureId, Song song, Measure measure)
         {
             this.songMeasureId = songMeasureId;
-            this.songId = songId;
-            this.measureId = measureId;
-            this.sequence = sequence;
+            this.song = song;
+            this.measure = measure;
+        }
+
+        public override string ToString()
+        {
+            return measure.Name;
         }
     }
 }

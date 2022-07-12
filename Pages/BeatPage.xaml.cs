@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FullSteamDrumMachine.net.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,14 +21,14 @@ namespace FullSteamDrumMachine.net.Pages
     /// </summary>
     public partial class BeatPage : Page
     {
-        public BeatPage()
+        public BeatPage(SongMeasure selectedMeasure)
         {
             InitializeComponent();
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            NavigationService.GoBack();
         }
     }
 }

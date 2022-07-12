@@ -86,7 +86,10 @@ namespace FullSteamDrumMachine.net.Pages
 
         private void PlayButton_Click(object sender, RoutedEventArgs e)
         {
-            throw new NotImplementedException();
+            if(selectedSong != null)
+            {
+                songManager.playSong(selectedSong);
+            }
         }
 
         private void ExportButton_Click(object sender, RoutedEventArgs e)

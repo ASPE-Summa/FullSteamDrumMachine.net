@@ -63,7 +63,7 @@ namespace FullSteamDrumMachine.net.Repository
                 {
                     connection.Open();
                     MySqlCommand command = connection.CreateCommand();
-                    command.CommandText = "SELECT * FROM song;";
+                    command.CommandText = "SELECT * FROM song ORDER BY name ASC;";
                     MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -81,7 +81,22 @@ namespace FullSteamDrumMachine.net.Repository
 
         public Song findById(int id)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection connection = new(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM song WHERE songId = @songId;";
+                    command.Parameters.AddWithValue("@songId", id);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    return new Song((int)reader["songId"], (string)reader["name"], (int)reader["bpm"]);
+                }
+                catch (Exception e)
+                {
+                    throw new DataRetrievalException($"Failed to retrieve song with id {id}", e);
+                }
+            }
         }
 
         public void updateBpm(Song song, int bpmValue)

@@ -18,4 +18,24 @@
     <PackageReference Include="MySql.Data" Version="8.0.29" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Update="DialogBoxes\ReuseMeasureDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="DialogBoxes\AddMeasureDialog.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="DialogBoxes\ReuseMeasureDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="DialogBoxes\AddMeasureDialog.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

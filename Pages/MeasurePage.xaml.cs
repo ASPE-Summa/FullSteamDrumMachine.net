@@ -1,9 +1,11 @@
-﻿using FullSteamDrumMachine.net.Model;
+﻿using FullSteamDrumMachine.net.DialogBoxes;
+using FullSteamDrumMachine.net.Model;
 using FullSteamDrumMachine.net.Service;
 using FullSteamDrumMachine.net.Service.Interfaces;
-using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 using Xceed.Wpf.Toolkit;
 
@@ -22,8 +24,24 @@ namespace FullSteamDrumMachine.net.Pages
         }
         #endregion
 
+        #region Properties
         private Song song;
         public Song Song { get { return song; } }
+
+        private ObservableCollection<SongMeasure> measures = new();
+        public ObservableCollection<SongMeasure> Measures
+        {
+            get { return measures; }
+            set { measures = value; OnPropertyChanged(); }
+        }
+
+        private SongMeasure? selectedMeasure;
+        public SongMeasure? SelectedMeasure
+        {
+            get { return selectedMeasure; }
+            set { selectedMeasure = value; OnPropertyChanged(); }
+        }
+        #endregion
 
         private ISongManager songManager;
         private IMeasureManager measureManager;
@@ -34,6 +52,12 @@ namespace FullSteamDrumMachine.net.Pages
             this.song = song;
             songManager = new SongManager();
             measureManager = new MeasureManager();
+            populateMeasures();
+        }
+
+        public void populateMeasures()
+        {
+            Measures = measureManager.getSongMeasureCollection(Song);
             DataContext = this;
         }
 
@@ -56,9 +80,66 @@ namespace FullSteamDrumMachine.net.Pages
             songManager.updateBpm(Song, currentValue);
         }
 
-        private void BackButton_Click(object sender, System.Windows.RoutedEventArgs e)
+        private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            NavigationService.Navigate(new SongPage());
+            NavigationService.GoBack();
+        }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(selectedMeasure != null)
+            {
+                NavigationService.Navigate(new BeatPage(selectedMeasure));
+            }
+        }
+
+        private void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if(SelectedMeasure != null)
+            {
+                MessageBoxResult result;
+                bool isOnlyInstance = measureManager.isOnlyInstance(SelectedMeasure.Measure);
+                if (isOnlyInstance)
+                {
+                    result = System.Windows.MessageBox.Show("This is the only instance of this measure. Once removed it will be gone completely.", "Confirm Delete", MessageBoxButton.YesNo);
+                    if(result == MessageBoxResult.Yes)
+                    {
+                        measureManager.deleteSongMeasure(SelectedMeasure);
+                        measureManager.deleteMeasure(SelectedMeasure.Measure);
+                    }
+                }
+                else
+                {
+                    result = System.Windows.MessageBox.Show("The selected measure will be removed from the song.It will still be available for later reuse." , "Confirm Delete", MessageBoxButton.YesNo);
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        measureManager.deleteSongMeasure(SelectedMeasure);
+                    }
+                }
+                populateMeasures();
+            }
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddMeasureDialog dialog = new AddMeasureDialog();
+            dialog.ShowDialog();
+            if (dialog.DialogResult == true)
+            {
+                measureManager.createForSong(dialog.MeasureName,song, Measures.Count);
+                populateMeasures();
+            }
+        }
+
+        private void ReuseButton_Click(object sender, RoutedEventArgs e)
+        {
+            ReuseMeasureDialog dialog = new ReuseMeasureDialog();
+            dialog.ShowDialog();
+            if (dialog.DialogResult == true && dialog.SelectedMeasure != null)
+            {
+                measureManager.addToSong(song, dialog.SelectedMeasure, Measures.Count);
+                populateMeasures();
+            }
         }
     }
 }

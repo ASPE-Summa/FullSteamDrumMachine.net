@@ -17,6 +17,6 @@ namespace FullSteamDrumMachine.net.Service.Interfaces
 
         public void updateBpm(Song song, int bpmValue);
 
-        public Song findSong(int id);
+        public Song? findSong(int id);
     }
 }

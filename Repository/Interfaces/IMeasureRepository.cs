@@ -12,7 +12,7 @@ namespace FullSteamDrumMachine.net.Repository.Interfaces
         /// <param name="measure"></param>
         /// <returns></returns>
         /// <exception cref="DataPersistanceException"></exception>
-       public Measure createMeasure(Measure measure);
+       public Measure createMeasure(string measureName);
 
         /// <summary>
         /// 
