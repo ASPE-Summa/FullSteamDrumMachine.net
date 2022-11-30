@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FullSteamDrumMachine.net.Model
 {
@@ -24,6 +25,11 @@ namespace FullSteamDrumMachine.net.Model
             this.bpm = bpm;
         }
 
+
+        public void showMessageBox()
+        {
+            MessageBox.Show(name);
+        }
         public override string ToString()
         {
             return Name;

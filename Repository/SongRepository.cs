@@ -9,6 +9,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace FullSteamDrumMachine.net.Repository
 {
@@ -67,7 +68,8 @@ namespace FullSteamDrumMachine.net.Repository
                     MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        result.Add(new Song((int)reader["songId"], (string)reader["name"], (int)reader["bpm"]));
+                        Song s = new Song((int)reader["songId"], (string)reader["name"], (int)reader["bpm"]);
+                        result.Add(s);
                     }
                 }
                 catch (Exception e)

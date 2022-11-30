@@ -2,6 +2,7 @@
 using FullSteamDrumMachine.net.Model;
 using FullSteamDrumMachine.net.Service;
 using FullSteamDrumMachine.net.Service.Interfaces;
+using NAudio.Midi;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -38,6 +39,8 @@ namespace FullSteamDrumMachine.net.Pages
             get { return selectedSong; }
             set { selectedSong = value; OnPropertyChanged(); }
         }
+
+        MidiOut midiOut;
         #endregion
 
         private ISongManager songManager;
@@ -46,6 +49,10 @@ namespace FullSteamDrumMachine.net.Pages
             InitializeComponent();
             songManager = new SongManager();
             PopulateSongs();
+
+            midiOut = new MidiOut(0);
+            NoteOnEvent note = new NoteOnEvent(0, 1, 50, 100, 50);
+            midiOut.Send(note.GetAsShortMessage());
         }
 
         public void PopulateSongs()

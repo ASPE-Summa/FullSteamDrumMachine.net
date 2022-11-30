@@ -143,7 +143,7 @@ namespace FullSteamDrumMachine.net.Repository
                 }
                 catch (Exception e)
                 {
-                    throw new DataRetrievalException("Failed to retrieve songs", e);
+                    throw new DataRetrievalException("Failed to retrieve measures for song", e);
                 }
             }
 

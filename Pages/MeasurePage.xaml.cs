@@ -43,21 +43,21 @@ namespace FullSteamDrumMachine.net.Pages
         }
         #endregion
 
-        private ISongManager songManager;
-        private IMeasureManager measureManager;
+        private ISongManager _songManager;
+        private IMeasureManager _measureManager;
 
         public MeasurePage(Song song)
         {
             InitializeComponent();
             this.song = song;
-            songManager = new SongManager();
-            measureManager = new MeasureManager();
+            _songManager = new SongManager();
+            _measureManager = new MeasureManager();
             populateMeasures();
         }
 
         public void populateMeasures()
         {
-            Measures = measureManager.getSongMeasureCollection(Song);
+            Measures = _measureManager.getSongMeasureCollection(Song);
             DataContext = this;
         }
 
@@ -77,7 +77,7 @@ namespace FullSteamDrumMachine.net.Pages
             }
 
             spinner.Content = currentValue;
-            songManager.updateBpm(Song, currentValue);
+            _songManager.updateBpm(Song, currentValue);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
@@ -98,14 +98,14 @@ namespace FullSteamDrumMachine.net.Pages
             if(SelectedMeasure != null)
             {
                 MessageBoxResult result;
-                bool isOnlyInstance = measureManager.isOnlyInstance(SelectedMeasure.Measure);
+                bool isOnlyInstance = _measureManager.isOnlyInstance(SelectedMeasure.Measure);
                 if (isOnlyInstance)
                 {
                     result = System.Windows.MessageBox.Show("This is the only instance of this measure. Once removed it will be gone completely.", "Confirm Delete", MessageBoxButton.YesNo);
                     if(result == MessageBoxResult.Yes)
                     {
-                        measureManager.deleteSongMeasure(SelectedMeasure);
-                        measureManager.deleteMeasure(SelectedMeasure.Measure);
+                        _measureManager.deleteSongMeasure(SelectedMeasure);
+                        _measureManager.deleteMeasure(SelectedMeasure.Measure);
                     }
                 }
                 else
@@ -113,7 +113,7 @@ namespace FullSteamDrumMachine.net.Pages
                     result = System.Windows.MessageBox.Show("The selected measure will be removed from the song.It will still be available for later reuse." , "Confirm Delete", MessageBoxButton.YesNo);
                     if (result == MessageBoxResult.Yes)
                     {
-                        measureManager.deleteSongMeasure(SelectedMeasure);
+                        _measureManager.deleteSongMeasure(SelectedMeasure);
                     }
                 }
                 populateMeasures();
@@ -126,7 +126,7 @@ namespace FullSteamDrumMachine.net.Pages
             dialog.ShowDialog();
             if (dialog.DialogResult == true)
             {
-                measureManager.createForSong(dialog.MeasureName,song, Measures.Count);
+                _measureManager.createForSong(dialog.MeasureName,song, Measures.Count);
                 populateMeasures();
             }
         }
@@ -137,7 +137,7 @@ namespace FullSteamDrumMachine.net.Pages
             dialog.ShowDialog();
             if (dialog.DialogResult == true && dialog.SelectedMeasure != null)
             {
-                measureManager.addToSong(song, dialog.SelectedMeasure, Measures.Count);
+                _measureManager.addToSong(song, dialog.SelectedMeasure, Measures.Count);
                 populateMeasures();
             }
         }

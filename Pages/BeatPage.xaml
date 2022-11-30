@@ -25,49 +25,28 @@
             <ColumnDefinition Width="0.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Label Grid.Column="1" Grid.Row="0">Manage Beat</Label>
-        <DataGrid Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" ItemsSource="{Binding BeatMeasures}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding MeasureId}" Visibility="Hidden"></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding InstrumentId}" Visibility="Hidden"></DataGridTextColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>Instrument</DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <Button Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Center" fa:Awesome.Content="Trash" 
-        TextElement.FontFamily="pack://application:,,,/FontAwesome.WPF;component/#FontAwesome"/>
-                                <TextBlock Text="{Binding Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn>
-                    <DataGridTemplateColumn.Header>Notes</DataGridTemplateColumn.Header>
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                                <CheckBox></CheckBox>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+        <ListView Grid.Row="2" Grid.Column="1" Grid.RowSpan="4" ItemsSource="{Binding Instruments}" Background="{DynamicResource MaterialDesignLightBackground}" Foreground="{DynamicResource MaterialDesignLightForeground}" d:ItemsSource="{d:SampleData ItemCount=3}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Background="Red" VerticalAlignment="Center">X</Button>
+                        <TextBlock Text="{Binding Name}" Foreground="White" VerticalAlignment="Center" Width="100px"></TextBlock>
+                        <ListBox ItemsSource="{Binding Beat}" SelectionMode="Multiple" d:ItemsSource="{d:SampleData ItemCount=16}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <CheckBox IsChecked="{Binding RelativeSource={RelativeSource Mode=FindAncestor,AncestorType={x:Type ListBoxItem}},Path=IsSelected}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ListBox>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
         <StackPanel Grid.Row="2" Grid.Column="3" Grid.RowSpan="4">
             <Button HorizontalContentAlignment="Center" IsEnabled="False">
                 <StackPanel Orientation="Horizontal">

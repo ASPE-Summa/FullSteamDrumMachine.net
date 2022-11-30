@@ -1,4 +1,5 @@
 ﻿using FullSteamDrumMachine.net.Model;
+using FullSteamDrumMachine.net.Repository.Exceptions;
 using FullSteamDrumMachine.net.Repository.Interfaces;
 using MySql.Data.MySqlClient;
 using System;
@@ -12,13 +13,7 @@ namespace FullSteamDrumMachine.net.Repository
 {
     public class InstrumentRepository : IInstrumentRepository
     {
-        private MySqlConnection connection = new MySqlConnection();
-        public MySqlConnection Connection { get { return connection; } }
-
-        public InstrumentRepository()
-        {
-            connection.ConnectionString = ConfigurationManager.ConnectionStrings["DrumMachineDb"].ConnectionString;
-        }
+        private string connectionString = ConfigurationManager.ConnectionStrings["DrumMachineDb"].ConnectionString;
 
         public void addToMeasure(Instrument instrument, Measure measure)
         {
@@ -42,7 +37,28 @@ namespace FullSteamDrumMachine.net.Repository
 
         public ICollection<Instrument> fetchForMeasure(Measure measure)
         {
-            throw new NotImplementedException();
+            List<Instrument> result = new List<Instrument>();
+            using (MySqlConnection connection = new(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    MySqlCommand command = connection.CreateCommand();
+                    command.CommandText = "SELECT * FROM Instrument i JOIN MeasureInstrument mi ON mi.instrumentId = i.instrumentId WHERE mi.measureId = @measureId ORDER BY name DESC;";
+                    command.Parameters.AddWithValue("@measureId", measure.MeasureId);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        result.Add(new Instrument((int)reader["instrumentId"], (string)reader["name"], (int)reader["midiNumber"], (string)reader["beat"]));
+                    }
+                }
+                catch (Exception e)
+                {
+                    throw new DataRetrievalException("Failed to retrieve instruments", e);
+                }
+            }
+
+            return result;
         }
 
         public ICollection<Instrument> fetchReuseOptionCollection(Measure measure)
