@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Org.BouncyCastle.Crmf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace FullSteamDrumMachine.net.Model
 {
@@ -17,10 +20,11 @@ namespace FullSteamDrumMachine.net.Model
         private int midiNumber;
         public int MidiNumber { get { return midiNumber; } }
 
-        private string beat = "0000000000000000";
-        public string Beat { get { return beat; } }
+        private List<ToggleButton> beat = new();
+        public List<ToggleButton> Beat { get { return beat;} }
 
-        public Instrument(int instrumentId, string name, int midiNumber, string beat)
+
+        public Instrument(int instrumentId, string name, int midiNumber,List<ToggleButton> beat)
         {
             this.instrumentId = instrumentId;
             this.name = name;

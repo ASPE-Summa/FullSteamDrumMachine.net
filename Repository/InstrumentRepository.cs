@@ -5,9 +5,13 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Forms.VisualStyles;
 
 namespace FullSteamDrumMachine.net.Repository
 {
@@ -49,11 +53,19 @@ namespace FullSteamDrumMachine.net.Repository
                     MySqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        result.Add(new Instrument((int)reader["instrumentId"], (string)reader["name"], (int)reader["midiNumber"], (string)reader["beat"]));
+                        List<ToggleButton> beat = new();
+                        foreach(char character in (string)reader["beat"])
+                        {
+                            ToggleButton c = new ToggleButton();
+                            c.IsChecked = character != '0';
+                            beat.Add(c);
+                        }
+                        result.Add(new Instrument((int)reader["instrumentId"], (string)reader["name"], (int)reader["midiNumber"], beat));
                     }
                 }
                 catch (Exception e)
                 {
+                    Debug.WriteLine(e.Message);
                     throw new DataRetrievalException("Failed to retrieve instruments", e);
                 }
             }

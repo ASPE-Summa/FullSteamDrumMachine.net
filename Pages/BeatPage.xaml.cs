@@ -2,6 +2,7 @@
 using FullSteamDrumMachine.net.Service;
 using FullSteamDrumMachine.net.Service.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -25,8 +26,8 @@ namespace FullSteamDrumMachine.net.Pages
         #endregion
 
         #region Properties
-        private ObservableCollection<Instrument> instruments = new();
-        public ObservableCollection<Instrument> Instruments
+        private ICollection<Instrument> instruments = null!;
+        public ICollection<Instrument> Instruments
         {
             get { return instruments; }
             set { instruments = value; OnPropertyChanged(); }
@@ -58,7 +59,7 @@ namespace FullSteamDrumMachine.net.Pages
 
         private void PopulateInstruments()
         {
-            Instruments = (ObservableCollection<Instrument>)_instrumentManager.getInstrumentCollectionForMeasure(SongMeasure.Measure);
+            Instruments = _instrumentManager.getInstrumentCollectionForMeasure(SongMeasure.Measure);
             DataContext = this;
         }
 

@@ -19,20 +19,16 @@ namespace FullSteamDrumMachine.net.Service
         
         public ICollection<Instrument> getInstrumentCollectionForMeasure(Measure measure)
         {
-            ObservableCollection<Instrument> result = new();
             try
             {
-                ICollection<Instrument> instruments = _instrumentRepository.fetchForMeasure(measure);
-                foreach (Instrument instrument in instruments)
-                {
-                    result.Add(instrument);
-                }
+                return _instrumentRepository.fetchForMeasure(measure);
+ 
             }
             catch (DataRetrievalException e)
             {
                 MessageBox.Show(e.Message);
+                return new List<Instrument>();
             }
-            return result;
         }
 
         public ICollection<Instrument> getReuseOptionCollection(Measure measure)
