@@ -23,6 +23,12 @@ namespace FullSteamDrumMachine.net.Model
         private List<ToggleButton> beat = new();
         public List<ToggleButton> Beat { get { return beat;} }
 
+        public Instrument(int instrumentId, string name, int midiNumber)
+        {
+            this.instrumentId = instrumentId;
+            this.name = name;
+            this.midiNumber = midiNumber;
+        }
 
         public Instrument(int instrumentId, string name, int midiNumber,List<ToggleButton> beat)
         {
